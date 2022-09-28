@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello QuoteController!{% endblock %}
+{% block title %}Liste des citations{% endblock %}
 
 {% block body %}
 <style>
@@ -13,6 +13,7 @@
         <ul>
             {%  for quote in quotes %}
                 <li>{{ quote.content }} </br>by <p class="text-muted">--{{ quote.meta }}</p></li>
+                <li>Aucun résultat trouvé</li>
             {% endfor %}
         </ul>
     </div>
