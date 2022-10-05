@@ -12,11 +12,5 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         return $this->redirectToRoute('quote_index');
-
-
-
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
     }
 }
