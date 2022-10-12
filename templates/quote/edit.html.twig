@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des citations{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <form>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">content</label>
+            <input type="content" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ quote.content|default('') }}">
+            <div id="emailHelp"</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">meta</label>
+            <input type="meta" class="form-control" id="exampleInputPassword1" value="{{ quote.meta|default('') }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
