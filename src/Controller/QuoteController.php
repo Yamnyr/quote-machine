@@ -50,10 +50,11 @@ class QuoteController extends AbstractController
             );
         }
         if ($request->isMethod('POST')){
-            $content = $request->request->get('name');
+            $content = $request->request->get('content');
             $meta = $request->request->get('meta');
             $quote->setContent($content);
             $quote->setMeta($meta);
+            $entityManager->persist($quote);
             $entityManager->flush();
             return $this->redirectToRoute('quote_index');
         }
@@ -65,11 +66,17 @@ class QuoteController extends AbstractController
     #[Route('/quote/new', name: 'quote_new')]
     public function new(Request $request, ManagerRegistry $doctrine,): Response
     {
-        $content = $request->query->get('content');
-        $meta = $request->query->get('meta');
-
-        //$quote->setName('Nouveau nom de produit !');
-        //$entityManager->flush();
+        $entityManager = $doctrine->getManager();
+        if ($request->isMethod('POST')){
+            $quote=new Quote();
+            $content = $request->request->get('content');
+            $meta = $request->request->get('meta');
+            $quote->setContent($content);
+            $quote->setMeta($meta);
+            $entityManager->persist($quote);
+            $entityManager->flush();
+            return $this->redirectToRoute('quote_index');
+        }
 
         return $this->render('quote/edit.html.twig');
     }
