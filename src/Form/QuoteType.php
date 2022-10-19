@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Quote;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +21,8 @@ class QuoteType extends AbstractType
             ->add('meta', TextType::class, [
                 'required' => true,
             ])
-            ->add('category', TextType::class, [
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
                 'required' => true,
             ])
         ;

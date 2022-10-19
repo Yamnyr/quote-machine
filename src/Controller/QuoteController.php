@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Quote;
 use App\Entity\Category;
+use App\Form\CategoryType;
 use Doctrine\Persistence\ManagerRegistry;
 
 class QuoteController extends AbstractController
