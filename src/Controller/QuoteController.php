@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Form\QuoteType;
 use App\Repository\QuoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Quote;
+use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
 
 class QuoteController extends AbstractController
@@ -35,13 +37,28 @@ class QuoteController extends AbstractController
 
         $entityManager->remove($quote);
         $entityManager->flush();
-        return $this->redirectToRoute('quote_index');
+        return $this->redirectToRoute('quote/new.html.twig');
     }
 
     #[Route('/quote/{id}/edit', name: 'quote_edit')]
-    public function update(ManagerRegistry $doctrine, int $id, Request $request): Response
+    public function update(ManagerRegistry $doctrine, Quote $quote, Request $request): Response
     {
-        $entityManager = $doctrine->getManager();
+        $form = $this->createForm(QuoteType::class, $quote);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+            return $this->redirectToRoute('quote_index');
+        }
+
+        return $this->renderForm('quote/edit.html.twig', [
+            'quote' => $quote,
+            'form'=> $form,
+        ]);
+
+
+        /*$entityManager = $doctrine->getManager();
         $quote = $entityManager->getRepository(Quote::class)->find($id);
 
         if (!$quote) {
@@ -60,13 +77,31 @@ class QuoteController extends AbstractController
         }
         return $this->render('quote/edit.html.twig',[
             'quote' => $quote
-        ]);
+        ]);*/
     }
 
     #[Route('/quote/new', name: 'quote_new')]
-    public function new(Request $request, ManagerRegistry $doctrine,): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
-        $entityManager = $doctrine->getManager();
+        $quote = new Quote();
+
+        $form = $this->createForm(QuoteType::class, $quote);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($quote);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('quote_index');
+        }
+
+        return $this->renderForm('quote/new.html.twig', [
+            'quote' => $quote,
+            'form'=> $form,
+        ]);
+
+        /*$entityManager = $doctrine->getManager();
         if ($request->isMethod('POST')){
             $quote=new Quote();
             $content = $request->request->get('content');
@@ -76,9 +111,8 @@ class QuoteController extends AbstractController
             $entityManager->persist($quote);
             $entityManager->flush();
             return $this->redirectToRoute('quote_index');
-        }
+        }*/
 
-        return $this->render('quote/edit.html.twig');
     }
 
 }

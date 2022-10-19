@@ -19,6 +19,9 @@ class Quote
     #[ORM\Column(length: 255)]
     private ?string $meta = null;
 
+    #[ORM\ManyToOne(inversedBy: 'quotes')]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Quote
     public function setMeta(string $meta): self
     {
         $this->meta = $meta;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
