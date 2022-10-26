@@ -3,21 +3,35 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1>Categorie {{ category.name }}</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ category.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ category.name }}</td>
+        </tr>
         </tbody>
     </table>
-
+    <div class="example-wrapper">
+        <h1><strong>Liste des citations venant de {{ category.name }}</strong></h1>
+        <ul>
+            {% for quote in category.quotes %}
+                <li><strong>{{ quote.content }} </strong> </br> by
+                    <p class="text-muted">--{{ quote.meta }}&nbsp &nbsp
+                        <a href="/category/{{ quote.category.id }}" type="button"
+                           class="btn btn-sm btn-dark">{{ quote.category }}</a> </br>
+                        <a type="button" class="btn btn-gray" href="/quote/{{ quote.id }}/edit">modifier</a>|
+                        <a type="button" class="btn btn-gray" href="/quote/{{ quote.id }}/delete">supprimer</a>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
     <a href="{{ path('app_category_index') }}">back to list</a>
 
