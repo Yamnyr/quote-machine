@@ -18,13 +18,25 @@
     <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('quote_index') }}">Quote-Machine</a>
-
-            <a href="/quote/new">Ajouter une citation</a>
-            &nbsp
-            <a href="/category/new">Ajouter une catégorie</a>
-            &nbsp
-            <a href="/category/">afficher une catégorie</a>
+            <a class="navbar-brand" href="{{ path('quote_index') }}"><h4>Quote-Machine</h4></a>
+            <div class="btn-group">
+                <button class="btn btn-gray dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <h7>ajouter</h7>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="/category/new" type="button" class="btn btn-gray">Ajouter une catégorie</a></li>
+                    <li><a href="/quote/new" type="button" class="btn btn-gray">Ajouter une citation</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-gray dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <h7>afficher</h7>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="/category/" type="button" class="btn btn-gray">catégorie</a></li>
+                    <li><a href="/quote/" type="button" class="btn btn-gray">citations</a></li>
+                </ul>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
