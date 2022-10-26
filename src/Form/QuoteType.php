@@ -23,7 +23,8 @@ class QuoteType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'required' => true,
+                'required' => false,
+                'choice_label' => 'name',
             ])
         ;
     }

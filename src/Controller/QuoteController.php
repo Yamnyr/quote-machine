@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Quote;
-use App\Entity\Category;
-use App\Form\CategoryType;
 use Doctrine\Persistence\ManagerRegistry;
 
 class QuoteController extends AbstractController
@@ -38,7 +36,7 @@ class QuoteController extends AbstractController
 
         $entityManager->remove($quote);
         $entityManager->flush();
-        return $this->redirectToRoute('quote/new.html.twig');
+        return $this->redirectToRoute('quote_index');
     }
 
     #[Route('/quote/{id}/edit', name: 'quote_edit')]

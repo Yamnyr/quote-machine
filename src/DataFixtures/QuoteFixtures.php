@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Quote;
+use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -14,6 +15,7 @@ class QuoteFixtures extends Fixture
             $quote = new Quote();
             $quote->setContent('content'.$i);
             $quote->setMeta('meta'.$i);
+            //$quote->setCategory('category'.$i)
             $manager->persist($quote);
         }
         $manager->flush();

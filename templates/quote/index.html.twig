@@ -12,7 +12,7 @@
        <h1>citations:</h1>
         <ul>
             {%  for quote in quotes %}
-                <li>{{ quote.content }} </br>by <p class="text-muted">--{{ quote.meta }} <a href="/quote/{{ quote.id }}/edit">modifier</a>|<a href="/quote/{{ quote.id }}/delete">supprimer</a></p></li>
+                <li>{{ quote.content }} </br>by <p class="text-muted">--{{ quote.meta }} <a href="/category/{{ quote.category.id }}" type="button" class="btn btn-sm btn-dark">{{ quote.category }}</a> <a href="/quote/{{ quote.id }}/edit">modifier</a>|<a href="/quote/{{ quote.id }}/delete">supprimer</a></></li>
             {% endfor %}
         </ul>
     </div>
