@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Quote;
 use App\Form\QuoteType;
 use App\Repository\QuoteRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Quote;
-use Doctrine\Persistence\ManagerRegistry;
 
 class QuoteController extends AbstractController
 {
@@ -24,7 +24,7 @@ class QuoteController extends AbstractController
         }
 
         return $this->render('quote/index.html.twig', [
-            'quotes' => $queryBuilder->getQuery()->getResult()
+            'quotes' => $queryBuilder->getQuery()->getResult(),
         ]);
     }
 
@@ -36,6 +36,7 @@ class QuoteController extends AbstractController
 
         $entityManager->remove($quote);
         $entityManager->flush();
+
         return $this->redirectToRoute('quote_index');
     }
 
@@ -48,14 +49,14 @@ class QuoteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $doctrine->getManager();
             $entityManager->flush();
+
             return $this->redirectToRoute('quote_index');
         }
 
         return $this->renderForm('quote/edit.html.twig', [
             'quote' => $quote,
-            'form'=> $form,
+            'form' => $form,
         ]);
-
 
         /*$entityManager = $doctrine->getManager();
         $quote = $entityManager->getRepository(Quote::class)->find($id);
@@ -97,7 +98,7 @@ class QuoteController extends AbstractController
 
         return $this->renderForm('quote/new.html.twig', [
             'quote' => $quote,
-            'form'=> $form,
+            'form' => $form,
         ]);
 
         /*$entityManager = $doctrine->getManager();
@@ -111,7 +112,5 @@ class QuoteController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('quote_index');
         }*/
-
     }
-
 }

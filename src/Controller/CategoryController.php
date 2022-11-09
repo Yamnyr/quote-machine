@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'app_category_index', methods: ['GET'])]/*show all*/
+    #[Route('/', name: 'app_category_index', methods: ['GET'])] /* show all */
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('category/index.html.twig', [
@@ -21,7 +21,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]/*create*/
+    #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])] /* create */
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
         $category = new Category();
@@ -40,7 +40,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]/*show*/
+    #[Route('/{id}', name: 'app_category_show', methods: ['GET'])] /* show */
     public function show(Category $category): Response
     {
         return $this->render('category/show.html.twig', [
@@ -48,7 +48,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]/*edit*/
+    #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])] /* edit */
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]/*remove*/
+    #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])] /* remove */
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {

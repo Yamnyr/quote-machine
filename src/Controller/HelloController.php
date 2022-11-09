@@ -13,7 +13,7 @@ class HelloController extends AbstractController
     {
         return $this->render('hello/index.html.twig', [
             'controller_name' => 'HelloController',
-            'name' => $name
+            'name' => $name,
         ]);
     }
 }
