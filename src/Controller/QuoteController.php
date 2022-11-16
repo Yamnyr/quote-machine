@@ -6,6 +6,7 @@ use App\Entity\Quote;
 use App\Form\QuoteType;
 use App\Repository\QuoteRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,7 @@ class QuoteController extends AbstractController
     }
 
     #[Route('/quote/{id}/delete', name: 'quote_delete')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(ManagerRegistry $doctrine, int $id): Response
     {
         $entityManager = $doctrine->getManager();
@@ -41,6 +43,7 @@ class QuoteController extends AbstractController
     }
 
     #[Route('/quote/{id}/edit', name: 'quote_edit')]
+    #[IsGranted('ROLE_ADMIN')]
     public function update(ManagerRegistry $doctrine, Quote $quote, Request $request): Response
     {
         $form = $this->createForm(QuoteType::class, $quote);
@@ -81,6 +84,7 @@ class QuoteController extends AbstractController
     }
 
     #[Route('/quote/new', name: 'quote_new')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $quote = new Quote();

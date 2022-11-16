@@ -23,18 +23,24 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('quote_index') }}"><h4>Quote-Machine</h4></a>
+        <a class="navbar-brand m-2" href="{{ path('quote_index') }}"><h4 class="font-weight-bold">Quote-Machine</h4></a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="btn-group">
+                <button class="btn btn-gray dropdown-toggle btn-outline-secondary m-2" type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <h7>ajouter</h7>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="/category/new" type="button" class="btn btn-gray">Ajouter une catégorie</a></li>
+                    <li><a href="/quote/new" type="button" class="btn btn-gray">Ajouter une citation</a></li>
+                </ul>
+            </div>
+        {% endif %}
         <div class="btn-group">
-            <button class="btn btn-gray dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <h7>ajouter</h7>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="/category/new" type="button" class="btn btn-gray">Ajouter une catégorie</a></li>
-                <li><a href="/quote/new" type="button" class="btn btn-gray">Ajouter une citation</a></li>
-            </ul>
-        </div>
-        <div class="btn-group">
-            <button class="btn btn-gray dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-gray dropdown-toggle btn-outline-secondary m-2" type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
                 <h7>afficher</h7>
             </button>
             <ul class="dropdown-menu">
@@ -43,15 +49,7 @@
             </ul>
         </div>
 
-
-        <div class="navbar-item-custom">
-            {% if app.user %}<a
-                href="{{ path('app_logout') }}">Déconnexion</a>
-            {% else %}
-                <a href="{{ path('app_login') }}">Connexion</a> | <a href="{{ path('app_register') }}">Inscription</a>
-            {% endif %}
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -65,7 +63,17 @@
                 <input class="form-control me-2" type="search" name="search" placeholder="Rechercher..."
                        aria-label="Rechercher" value="{{ search|default('') }}">
                 <button class="btn btn-outline-success" type="submit">Rechercher</button>
+
             </form>
+            <div class="navbar-item-custom">
+                {% if app.user %}<a class="btn btn-danger m-2"
+                                    href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="btn btn-success m-2" href="{{ path('app_login') }}">Connexion</a>|<a
+                        class="btn btn-success m-2"
+                        href="{{ path('app_register') }}">Inscription</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>
